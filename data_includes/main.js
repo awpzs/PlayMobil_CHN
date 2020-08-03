@@ -40,6 +40,8 @@ newTrial("identification" ,
 
 InitiateRecorder("http://myserver/saveVoiceRecordings.php", "Please grant the experiment access to your microphone.").label("initRecorder")
 
+UploadRecordings("sendAsync", "noblock")
+
 newTrial("instruction",
         newText("<p>在该实验中，你会先看见一张图片和一个句子，请大声朗读这个句子，然后点击它。</p><p>接下来你会看见另一张图片，请用一个句子说出图片中的变化。</p><p>口头描述完变化后，请点击“继续”按钮。</p>")
             .settings.center()
