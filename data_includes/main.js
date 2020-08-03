@@ -2,7 +2,7 @@ PennController.ResetPrefix(null); //Initiates PennController
 //PennController.DebugOff()
 PennController.AddHost("https://raw.githubusercontent.com/awpzs/Playmobil_CHN/master/images/")
 
-Sequence( "information", "initRecorder", "instruction", "prac", "send", "final" )
+Sequence( "information", "identification", "initRecorder", "instruction", "prac", "exp_start", "block_1", "rest", "block_2", "send", "final" )
 
 //PennController.SetCounter( "setcounter" );
 
@@ -85,15 +85,15 @@ Template(
             ,
             getVoiceRecorder("recorder")
                 .stop()
-            ,
-            getMediaRecorder("recorder").test.recorded()
+//            ,
+//            getMediaRecorder("recorder").test.recorded()
   )
   .log( "ID"     , getVar("ID")    )
   .log( "List"  , variable.List)
   .log( "Item"   , variable.Item   )
   .log( "Amb"   , variable.Amb   )
   .log( "Vis"   , variable.Vis   )
-  .log( "Condition"   , variable.Context   )
+  .log( "Condition"   , variable.Condition   )
   )
 
 newTrial("exp_start",
@@ -147,7 +147,7 @@ Template(
   .log( "Item"   , variable.Item   )
   .log( "Amb"   , variable.Amb   )
   .log( "Vis"   , variable.Vis   )
-  .log( "Condition"   , variable.Context   )
+  .log( "Condition"   , variable.Condition   )
   )  
 
 newTrial("rest",
@@ -201,7 +201,7 @@ Template(
   .log( "Item"   , variable.Item   )
   .log( "Amb"   , variable.Amb   )
   .log( "Vis"   , variable.Vis   )
-  .log( "Condition"   , variable.Context   )
+  .log( "Condition"   , variable.Condition   )
   )  
 SendResults( "send" )
 
