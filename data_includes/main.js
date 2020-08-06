@@ -43,8 +43,9 @@ InitiateRecorder("http://myserver/saveVoiceRecordings.php", "Please grant the ex
 UploadRecordings("sendAsync", "noblock")
 
 newTrial("instruction",
-        newText("<p>在该实验中，你会先看见一张图片和一个句子，请大声朗读这个句子，然后点击它。</p><p>接下来你会看见另一张图片，请用一个句子说出图片中的变化。</p><p>口头描述完变化后，请点击“继续”按钮。</p>")
-            .settings.center()
+        newText("<p>在该实验中，您需要观看一系列场景，场景中的玩具角色会做出各种行为。我们想要了解您会如何描述场景中的变化，从而使看不见的听众了解发生了什么。</p>")        
+        ,
+        newText("<p><strong>实验步骤：</strong></p><p>首先，您会先看见一张图片和一个句子。请大声朗读这个句子，然后点击它。</p><p>接下来，你会看见另一张图片，图片中的某个玩具角色会做出某种动作。请大声说出该角色做了什么动作。您的句子应当以“现在”开头。您的句子应当让看不见图片的人也能理解场景中的变化。</p><p>口头描述完变化后，请点击“继续”按钮。</p>")
             .print()
         ,
         newButton("开始练习")
@@ -60,7 +61,17 @@ Template(
             newMediaRecorder("recorder", "audio")
                 .record()
             ,
+            newText("tar1", variable.target1)
+            ,
+            newText("tar2", variable.target2)
+            ,
+            newText("inst_read", "<p>请大声朗读下面的句子。读完后，请点击句子。</p>")
+                .settings.center()
+                .print()
+            ,
             newImage("one", variable.FirstDisplay)
+                .size(342,256)
+                .settings.center()
                 .print()
             ,
             newText("sentence", variable.Chinese)
@@ -72,10 +83,22 @@ Template(
                 .add( getText("sentence") )
                 .wait()
             ,
+            getText("inst_read")
+                .remove()
+            ,
             getText("sentence")
                 .remove()
             ,
+            newText("inst_speak", "<p>请以“现在”开头，描述图片中角色的动作变化。例如，您可以说：</p>")
+                .settings.after("target1", getText("tar1"))
+                .settings.after(newText("&nbsp;或&nbsp;"))
+                .settings.after("target2", getText("tar2"))
+                .settings.center()
+                .print()
+            ,
             newImage("two", variable.SecondDisplay)
+                .size(342,256)
+                .settings.center()
                 .print()
             ,
             newButton("继续")
@@ -85,8 +108,8 @@ Template(
             ,
             getVoiceRecorder("recorder")
                 .stop()
-//            ,
-//            getMediaRecorder("recorder").test.recorded()
+            ,
+            getMediaRecorder("recorder").test.recorded()
   )
   .log( "ID"     , getVar("ID")    )
   .log( "List"  , variable.List)
@@ -94,6 +117,7 @@ Template(
   .log( "Amb"   , variable.Amb   )
   .log( "Vis"   , variable.Vis   )
   .log( "Condition"   , variable.Condition   )
+  .log( "Sentence" , variable.Chinese)
   )
 
 newTrial("exp_start",
@@ -115,6 +139,8 @@ Template(
                 .record()
             ,
             newImage("one", variable.FirstDisplay)
+                .size(342,256)
+                .settings.center()
                 .print()
             ,
             newText("sentence", variable.Chinese)
@@ -130,6 +156,8 @@ Template(
                 .remove()
             ,
             newImage("two", variable.SecondDisplay)
+                .size(342,256)
+                .settings.center()
                 .print()
             ,
             newButton("继续")
@@ -148,6 +176,7 @@ Template(
   .log( "Amb"   , variable.Amb   )
   .log( "Vis"   , variable.Vis   )
   .log( "Condition"   , variable.Condition   )
+  .log( "Sentence" , variable.Chinese)
   )  
 
 newTrial("rest",
@@ -169,6 +198,8 @@ Template(
                 .record()
             ,
             newImage("one", variable.FirstDisplay)
+                .size(342,256)
+                .settings.center()
                 .print()
             ,
             newText("sentence", variable.Chinese)
@@ -184,6 +215,8 @@ Template(
                 .remove()
             ,
             newImage("two", variable.SecondDisplay)
+                .size(342,256)
+                .settings.center()
                 .print()
             ,
             newButton("继续")
@@ -202,6 +235,7 @@ Template(
   .log( "Amb"   , variable.Amb   )
   .log( "Vis"   , variable.Vis   )
   .log( "Condition"   , variable.Condition   )
+  .log( "Sentence" , variable.Chinese)
   )  
 SendResults( "send" )
 
