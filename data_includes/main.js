@@ -43,13 +43,13 @@ InitiateRecorder("http://myserver/saveVoiceRecordings.php", "请允许expt.pcibe
 UploadRecordings("sendAsync", "noblock")
 
 newTrial("instruction",
-        newText("<p>在该实验中，您需要观看一系列场景，场景中的玩具角色会做出各种行为。</p><p>我们想要了解您会如何描述场景中的变化，从而使看不见的听众了解发生了什么。</p>")  
+        newText("<p>非常感谢您能参加该实验！在该实验中，您需要观看一系列场景，场景中的玩具角色会做出各种行为。</p><p>我们想要了解您会如何描述场景中的变化，从而使看不见的听众了解发生了什么。</p>")  
             .print()
         ,
-        newText("<p><strong>实验步骤：</strong></p><p>首先，您会先看见一张图片和一个句子。请大声朗读这个句子，然后点击它。</p><p>接下来，你会看见另一张图片，图片中的某个玩具角色会做出某种动作。请大声说出该角色做了什么动作。</p><p>您的句子应当以“现在”开头。您的句子应当让看不见图片的人也能理解场景中的变化。</p><p>口头描述完变化后，请点击“继续”按钮。</p>")
+        newText("<p><strong>实验步骤：</strong></p><p>首先，您会先看见一张图片和一个句子。请假想您有一位看不见图片的听众。请大声朗读这个句子，然后点击它。</p><p>接下来，你会看见另一张图片，图片中的某个玩具角色会做出某种动作。请用一个<u>新的句子</u>，大声说出该角色做了什么动作。</p><p>您的句子应当以“现在”开头。您的句子应当让看不见图片的听众也能够用同样的玩具，让那个角色做出同样的动作。</p><p></p>")
             .print()
         ,
-        newText("<p>请点击下方按钮，开始练习。</p>")
+        newText("<p>口头描述完变化后，请点击“继续”按钮。请点击下方按钮，观看示例，开始练习。</p>")
             .print()
         ,
         newButton("开始练习")
@@ -65,11 +65,7 @@ Template(
             newMediaRecorder("recorder", "audio")
                 .record()
             ,
-            newText("tar1", variable.target1)
-            ,
-            newText("tar2", variable.target2)
-            ,
-            newText("inst_read", "<p>请大声朗读下面的句子。读完后，请点击句子。</p>")
+            newText("inst_read", "<p>请大声朗读下面的句子。读完后，请点击句子，观看第二张图片。</p>")
                 .settings.center()
                 .print()
             ,
@@ -97,6 +93,9 @@ Template(
                 .settings.after(newText(variable.target1))
                 .settings.after(newText("&nbsp;或&nbsp;"))
                 .settings.after(newText(variable.target2))
+                .settings.after(newText("&nbsp;或&nbsp;"))
+                .settings.after(newText(variable.target3))
+                .settings.after(newText("<p>您可以根据图片内容，自由选择您认为合适的表达方式。</p>"))
                 .settings.center()
                 .print()
             ,
@@ -105,7 +104,11 @@ Template(
                 .settings.center()
                 .print()
             ,
-            newButton("已说完，继续")
+            newText(variable.cont)
+                .settings.center()
+                .print()
+            ,
+            newButton("继续")
                 .settings.center()
                 .print()
                 .wait()
