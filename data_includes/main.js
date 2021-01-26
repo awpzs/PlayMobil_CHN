@@ -3,7 +3,7 @@ var showProgressBar = false;
 //PennController.DebugOff()
 PennController.AddHost("https://raw.githubusercontent.com/awpzs/Playmobil_CHN/master/images/")
 
-Sequence( "information", "identification", "recording_information", "initRecorder", "instruction", "prac", "exp_start", "block_1", "rest", "block_2", "send", "final" )
+Sequence( "setcounter", "information", "identification", "recording_information", "initRecorder", "instruction", "prac", "exp_start", "block_1", "rest", "block_2", "send", "final" )
 
 PennController.SetCounter( "setcounter" );
 
@@ -270,9 +270,16 @@ Template(
 SendResults( "send" )
 
 newTrial( "final" ,
-    newFunction("redirect", function(){ window.location = "https://app.prolific.co/submissions/complete?cc=36EDE175"; })
+//    newFunction("redirect", function(){ window.location = "https://app.prolific.co/submissions/complete?cc=36EDE175"; }) ,
+    newText("<p>实验结束。非常感谢您的参与！</p>")
+        .settings.center()
+        .print()
     ,
-    newText("<p>实验结束。非常感谢您的参与！</p><p>5秒后自动<a href='https://app.prolific.co/submissions/complete?cc=36EDE175'>返回Prolific……</a></p>")
+    newText("<p>如果您在上一个页面被要求下载了您的录音文件，请将该文件和您的Prolific ID发送至<a href='mailto:shi.zhang@stir.ac.uk'>shi.zhang@stir.ac.uk，然后点击下方链接返回Prolific。</a></p><p>否则，请直接点击下方链接返回Prolific并完成该实验。</p>")
+        .settings.center()
+        .print()
+    ,
+    newText("<p<a href='https://app.prolific.co/submissions/complete?cc=36EDE175'>返回Prolific……</a></p>")
         .settings.center()
         .print()
     ,
